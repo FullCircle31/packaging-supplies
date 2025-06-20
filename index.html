@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- ... head content ... -->
+  <meta charset="UTF-8">
+  <title>Packaging Supplies</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* ... existing styles ... */
-    .jet-logo {
-      width: 48px;
-      height: 48px;
-      display: inline-block;
-      vertical-align: middle;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed, #e0e7ef;
+      background-size: cover;
+    }
+    header {
+      background: rgba(34,49,63,0.92);
+      color: #fff;
+      padding: 20px 10px 10px 10px;
+      text-align: center;
     }
     .logo-container {
       display: flex;
@@ -17,7 +24,72 @@
       gap: 18px;
       margin-bottom: 8px;
     }
-    /* ... rest of your styles ... */
+    .jet-logo {
+      width: 48px;
+      height: 48px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    nav { margin: 10px 0; }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+      color: #ffdc65;
+    }
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: 40px auto 0 auto;
+      background: rgba(255,255,255,0.92);
+      border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    }
+    section { margin-bottom: 40px; }
+    .tabs-section {
+      background: #f7f7f7;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      margin-top: 30px;
+      text-align: center;
+    }
+    .tabs-section h2 { margin-top: 0; }
+    .tabs-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .tab-link {
+      display: inline-block;
+      background: #22313f;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.2s;
+      font-size: 1rem;
+    }
+    .tab-link:hover {
+      background: #4a6072;
+    }
+    footer {
+      background: rgba(34,49,63,0.9);
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+    }
   </style>
 </head>
 <body>
@@ -28,9 +100,101 @@
     </div>
     <nav>
       <a href="index.html">Home</a> |
-      <a href="about.html">About Us</a>
+      <a href="about.html">About Us</a> |
+      <a href="contact.html">Contact Us</a>
     </nav>
   </header>
-  <!-- ... rest of your site ... -->
+  <main>
+    <section>
+      <h2>Welcome to Packaging Supplies!</h2>
+      <p>Your one-stop shop for all packaging solutions.</p>
+      <ul>
+        <li>Boxes and containers</li>
+        <li>Bubble wrap and cushioning</li>
+        <li>Tape and dispensers</li>
+        <li>Custom packaging options</li>
+      </ul>
+      <p>We offer high-quality packaging products at competitive prices. Browse our site to learn more about our offerings and how we can help you protect your products.</p>
+      <p>Have questions? Visit our <a href="about.html">About Us</a> page to learn more about our company!</p>
+    </section>
+    <section class="tabs-section">
+      <h2>Reference Guides</h2>
+      <div class="tabs-list">
+        <a class="tab-link" href="#">A-A-1051</a>
+        <a class="tab-link" href="#">A-A-1898</a>
+        <a class="tab-link" href="#">A-A-203</a>
+        <a class="tab-link" href="#">A-A-3174</a>
+        <a class="tab-link" href="#">A-A-59135</a>
+        <a class="tab-link" href="#">A-A-59136</a>
+        <a class="tab-link" href="#">A-A-883</a>
+        <a class="tab-link" href="#">ASTM-D-5118</a>
+        <a class="tab-link" href="#">ASTM-D-5330</a>
+        <a class="tab-link" href="#">ASTM-D-5486</a>
+        <a class="tab-link" href="#">ASTM-D-5749</a>
+        <a class="tab-link" href="#">ASTM-D-6123</a>
+        <a class="tab-link" href="#">ASTM-D-6251</a>
+        <a class="tab-link" href="#">ASTM-D-6256</a>
+        <a class="tab-link" href="#">ASTM-D-6880</a>
+        <a class="tab-link" href="#">ASTM-D-7478</a>
+        <a class="tab-link" href="#">D6251</a>
+        <a class="tab-link" href="#">DLR</a>
+        <a class="tab-link" href="#">label</a>
+        <a class="tab-link" href="#">MIL-B-117</a>
+        <a class="tab-link" href="#">MIL-B-121F</a>
+        <a class="tab-link" href="#">MIL-B-131</a>
+        <a class="tab-link" href="#">Mil-B-22020</a>
+        <a class="tab-link" href="#">MIL-B-22191</a>
+        <a class="tab-link" href="#">MIL-B-26195</a>
+        <a class="tab-link" href="#">MIL-C-104</a>
+        <a class="tab-link" href="#">MIL-C-15074</a>
+        <a class="tab-link" href="#">MIL-D-3464</a>
+        <a class="tab-link" href="#">MIL-D-6054</a>
+        <a class="tab-link" href="#">MIL-DTL-117</a>
+        <a class="tab-link" href="#">MIL-DTL-17667</a>
+        <a class="tab-link" href="#">MIL-DTL-24466</a>
+        <a class="tab-link" href="#">MIL-DTL-46506</a>
+        <a class="tab-link" href="#">MIL-DTL-81997</a>
+        <a class="tab-link" href="#">MIL-P-130</a>
+        <a class="tab-link" href="#">MIL-P-17667</a>
+        <a class="tab-link" href="#">MIL-P-3420</a>
+        <a class="tab-link" href="#">MIL-PRF-121G</a>
+        <a class="tab-link" href="#">MIL-PRF-131</a>
+        <a class="tab-link" href="#">MIL-PRF-16173</a>
+        <a class="tab-link" href="#">MIL-PRF-21260</a>
+        <a class="tab-link" href="#">MIL-PRF-22191</a>
+        <a class="tab-link" href="#">MIL-PRF-26514</a>
+        <a class="tab-link" href="#">MIL-PRF-3150</a>
+        <a class="tab-link" href="#">MIL-PRF-32033</a>
+        <a class="tab-link" href="#">MIL-PRF-3420</a>
+        <a class="tab-link" href="#">MIL-PRF-46170</a>
+        <a class="tab-link" href="#">MIL-PRF-7808</a>
+        <a class="tab-link" href="#">MIL-PRF-7870</a>
+        <a class="tab-link" href="#">MIL-PRF-81705</a>
+        <a class="tab-link" href="#">MS20003</a>
+        <a class="tab-link" href="#">MS27683</a>
+        <a class="tab-link" href="#">MS27684</a>
+        <a class="tab-link" href="#">MX56789</a>
+        <a class="tab-link" href="#">MXC56789</a>
+        <a class="tab-link" href="#">NN-P-71</a>
+        <a class="tab-link" href="#">PPP-B-1672</a>
+        <a class="tab-link" href="#">PPP-B-566</a>
+        <a class="tab-link" href="#">PPP-B-601</a>
+        <a class="tab-link" href="#">PPP-B-621</a>
+        <a class="tab-link" href="#">PPP-B-636</a>
+        <a class="tab-link" href="#">PPP-C-1120</a>
+        <a class="tab-link" href="#">PPP-C-1752</a>
+        <a class="tab-link" href="#">PPP-C-795</a>
+        <a class="tab-link" href="#">PPP-P-291</a>
+        <a class="tab-link" href="#">PPP-T-45</a>
+        <a class="tab-link" href="#">PPP-T-60</a>
+        <a class="tab-link" href="#">PPP-T-76</a>
+        <a class="tab-link" href="#">PPP-T-97</a>
+        <a class="tab-link" href="#">VV-L-800</a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 Packaging Supplies
+  </footer>
 </body>
 </html>
