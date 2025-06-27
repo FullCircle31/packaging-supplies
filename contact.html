@@ -10,12 +10,17 @@
       margin: 0;
       background: url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed;
       background-size: cover;
+      color: #fff;
     }
     header {
       background: rgba(34,49,63,0.92);
       color: #fff;
       padding: 20px 10px 10px 10px;
       text-align: center;
+    }
+    header,
+    header * {
+      color: #fff !important;
     }
     .logo-container {
       display: flex;
@@ -32,60 +37,64 @@
     }
     nav { margin: 10px 0; }
     nav a {
-      color: #fff;
+      color: #fff !important;
       text-decoration: none;
       margin: 0 10px;
       font-weight: bold;
     }
     nav a:hover {
       text-decoration: underline;
-      color: #ffdc65;
+      color: #ffdc65 !important;
     }
     main {
       padding: 20px;
-      max-width: 500px;
+      max-width: 600px;
       margin: 40px auto 0 auto;
-      background: rgba(255,255,255,0.95);
+      background: rgba(34,49,63,0.82);
       border-radius: 10px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.07);
     }
     h2 { text-align: center; }
     form {
       display: flex;
       flex-direction: column;
       gap: 15px;
-      margin-top: 20px;
     }
     label {
       font-weight: bold;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
     }
     input, textarea {
-      padding: 8px 10px;
-      border: 1px solid #ccc;
+      padding: 10px;
       border-radius: 5px;
+      border: none;
       font-size: 1em;
-      resize: vertical;
+      width: 100%;
+      box-sizing: border-box;
     }
-    textarea { min-height: 80px; }
-    button {
-      background: #22313f;
-      color: #fff;
-      padding: 10px 0;
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    button[type="submit"] {
+      background-color: #ffdc65;
+      color: #22313f;
       border: none;
       border-radius: 5px;
-      font-weight: bold;
+      padding: 12px 0;
       font-size: 1em;
+      font-weight: bold;
       cursor: pointer;
       transition: background 0.2s;
     }
-    button:hover {
-      background: #4a6072;
+    button[type="submit"]:hover {
+      background-color: #fff1a9;
     }
-    .contact-info {
-      margin-top: 30px;
+    .note {
+      font-size: 0.9em;
+      color: #ffe;
+      margin-bottom: 15px;
       text-align: center;
-      color: #22313f;
     }
     footer {
       background: rgba(34,49,63,0.9);
@@ -113,23 +122,22 @@
   </header>
   <main>
     <h2>Contact Us</h2>
-    <form autocomplete="off">
-      <label for="name">Name</label>
+    <div class="note">
+      Please fill out the form below and your message will be sent to tbaileyams@aol.com.
+    </div>
+    <form action="https://formsubmit.co/tbaileyams@aol.com" method="POST">
+      <input type="hidden" name="_captcha" value="false">
+      <label for="name">Name:</label>
       <input type="text" id="name" name="name" required>
 
-      <label for="email">Email</label>
+      <label for="email">Email:</label>
       <input type="email" id="email" name="email" required>
 
-      <label for="message">Message</label>
+      <label for="message">Message:</label>
       <textarea id="message" name="message" required></textarea>
 
-      <button type="submit">Send Message</button>
+      <button type="submit">Send</button>
     </form>
-    <div class="contact-info">
-      <p><strong>Email:</strong> tbaileyams@aol.com</p>
-      <p><strong>Phone:</strong> (555) 123-4567</p>
-      <p><strong>Address:</strong> 123 Main St, Hometown, USA</p>
-    </div>
   </main>
   <footer>
     &copy; 2025 Packaging Supplies
