@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Shopping Cart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+    main {
+      max-width: 700px;
+      margin: 40px auto;
+      background: rgba(34,49,63,0.90);
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+      padding: 40px 24px 32px 24px;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 0;
+      color: #ffdc65;
+      margin-bottom: 24px;
+    }
+    .cart-title {
+      font-size: 1.08em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: center;
+      color: #ffdc65;
+    }
+    .cart-details {
+      color: #fff;
+      margin-bottom: 22px;
+      text-align: center;
+      border-bottom: 1px solid #ffdc65;
+      padding-bottom: 14px;
+    }
+    .cart-details input[type="number"] {
+      width: 60px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      text-align: center;
+      padding: 4px 6px;
+    }
+    .cart-remove {
+      background: #e74c3c;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 3px 12px;
+      cursor: pointer;
+      margin-left: 12px;
+      font-size: 0.96em;
+      transition: background 0.2s;
+    }
+    .cart-remove:hover {
+      background: #c0392b;
+    }
+    .empty-cart {
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+      margin-top: 18px;
+      margin-bottom: 24px;
+    }
+    .grand-total {
+      text-align: center;
+      font-weight: bold;
+      color: #ffdc65;
+      font-size: 1.2em;
+      margin-top: 18px;
+    }
+    .btn-shop {
+      display: inline-block;
+      background: #ffdc65;
+      color: #22313f;
+      border-radius: 6px;
+      text-decoration: none;
+      padding: 10px 24px;
+      font-weight: bold;
+      margin: 24px auto 0 auto;
+      transition: background 0.2s;
+      text-align: center;
+    }
+    .btn-shop:hover {
+      background: #ffe9a8;
+      color: #22313f;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Your Shopping Cart</h1>
+    <div id="cart-content">
+      <div class="empty-cart">Your cart is empty.</div>
+    </div>
+    <div class="grand-total" id="grand-total"></div>
+    <a href="index.html" class="btn-shop">&larr; Continue Shopping</a>
+  </main>
+  <script>
+    function getCart() {
+      return JSON.parse(localStorage.getItem('cart') || '[]');
+    }
+    function saveCart(cart) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+    function updateCartItem(productId, quantity) {
+      let cart = getCart();
+      cart = cart.map(item =>
+        item.id === productId ? { ...item, quantity } : item
+      ).filter(item => item.quantity > 0);
+      saveCart(cart);
+    }
+    function removeFromCart(productId) {
+      let cart = getCart();
+      cart = cart.filter(item => item.id !== productId);
+      saveCart(cart);
+    }
+    function renderCart() {
+      const cartContent = document.getElementById('cart-content');
+      const grandTotalDiv = document.getElementById('grand-total');
+      const cart = getCart();
+      if (cart.length === 0) {
+        cartContent.innerHTML = `<div class="empty-cart">Your cart is empty.</div>`;
+        grandTotalDiv.textContent = '';
+        return;
+      }
+      let html = '';
+      let grandTotal = 0;
+      cart.forEach(item => {
+        const total = item.price * item.quantity;
+        grandTotal += total;
+        html += `
+          <div class="cart-details" data-id="${item.id}">
+            <strong>${item.name}</strong><br>
+            $${item.price.toFixed(2)} per unit<br>
+            Quantity:
+            <input type="number" min="1" value="${item.quantity}" class="cart-qty-input" data-id="${item.id}">
+            <button class="cart-remove" data-id="${item.id}">Remove</button>
+            <br>
+            <strong>Total: $${total.toFixed(2)}</strong>
+          </div>
+        `;
+      });
+      cartContent.innerHTML = html;
+      grandTotalDiv.textContent = `Grand Total: $${grandTotal.toFixed(2)}`;
+
+      // Attach event listeners to new elements
+      cartContent.querySelectorAll('.cart-qty-input').forEach(input => {
+        input.addEventListener('change', function() {
+          const newQty = parseInt(this.value, 10);
+          if (newQty > 0) {
+            updateCartItem(this.dataset.id, newQty);
+            renderCart();
+          }
+        });
+      });
+      cartContent.querySelectorAll('.cart-remove').forEach(btn => {
+        btn.addEventListener('click', function() {
+          removeFromCart(this.dataset.id);
+          renderCart();
+        });
+      });
+    }
+    renderCart();
+  </script>
+</body>
+</html>
