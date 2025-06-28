@@ -80,6 +80,50 @@
     .purchase-form button:hover {
       background: #ffe9a8;
     }
+    .cart-section {
+      margin-top: 36px;
+      background: rgba(0,0,0,0.18);
+      border-radius: 8px;
+      padding: 18px 14px;
+    }
+    .cart-title {
+      font-size: 1.08em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: center;
+      color: #ffdc65;
+    }
+    .cart-details {
+      color: #fff;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .cart-details input[type="number"] {
+      width: 60px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      text-align: center;
+      padding: 4px 6px;
+    }
+    .cart-remove {
+      background: #e74c3c;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 3px 12px;
+      cursor: pointer;
+      margin-left: 10px;
+      font-size: 0.96em;
+      transition: background 0.2s;
+    }
+    .cart-remove:hover {
+      background: #c0392b;
+    }
+    .empty-cart {
+      color: #ccc;
+      font-style: italic;
+      text-align: center;
+    }
     .back-link {
       display: block;
       text-align: center;
@@ -114,14 +158,71 @@
       <input type="number" id="quantity" name="quantity" min="1" value="1" required>
       <button type="submit">Add to Cart</button>
     </form>
+    <section class="cart-section" id="cart-section">
+      <div class="cart-title">Shopping Cart</div>
+      <div id="cart-content">
+        <div class="empty-cart">Your cart is empty.</div>
+      </div>
+    </section>
     <a href="index.html" class="back-link">&larr; Back to Reference Guides</a>
   </main>
   <script>
+    // Simple cart object for this page only
+    let cart = {
+      product: {
+        name: "A-A-1051 Corrugated Roll",
+        price: 34.99,
+        quantity: 0
+      }
+    };
+
+    // Update cart display
+    function renderCart() {
+      const cartContent = document.getElementById('cart-content');
+      if (cart.product.quantity > 0) {
+        cartContent.innerHTML = `
+          <div class="cart-details">
+            <strong>${cart.product.name}</strong><br>
+            $${cart.product.price.toFixed(2)} per roll<br>
+            Quantity: 
+            <input type="number" min="1" value="${cart.product.quantity}" id="cart-qty-input">
+            <button class="cart-remove" id="cart-remove-btn">Remove</button>
+            <br>
+            <strong>Total: $${(cart.product.price * cart.product.quantity).toFixed(2)}</strong>
+          </div>
+        `;
+        // Update quantity
+        document.getElementById('cart-qty-input').addEventListener('change', function() {
+          const newQty = parseInt(this.value, 10);
+          if (newQty > 0) {
+            cart.product.quantity = newQty;
+            renderCart();
+          }
+        });
+        // Remove item
+        document.getElementById('cart-remove-btn').addEventListener('click', function() {
+          cart.product.quantity = 0;
+          renderCart();
+        });
+      } else {
+        cartContent.innerHTML = `<div class="empty-cart">Your cart is empty.</div>`;
+      }
+    }
+
+    // Handle form submission
     document.querySelector('.purchase-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      const qty = document.getElementById('quantity').value;
-      alert('Added ' + qty + ' A-A-1051 Corrugated Roll(s) to cart!');
+      const qty = parseInt(document.getElementById('quantity').value, 10);
+      if (qty > 0) {
+        cart.product.quantity += qty;
+        renderCart();
+        // Optional: Reset form
+        document.getElementById('quantity').value = 1;
+      }
     });
+
+    // Initial render
+    renderCart();
   </script>
 </body>
 </html>
