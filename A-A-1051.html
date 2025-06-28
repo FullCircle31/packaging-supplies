@@ -116,5 +116,12 @@
     </form>
     <a href="index.html" class="back-link">&larr; Back to Reference Guides</a>
   </main>
+  <script>
+    document.querySelector('.purchase-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const qty = document.getElementById('quantity').value;
+      alert('Added ' + qty + ' A-A-1051 Corrugated Roll(s) to cart!');
+    });
+  </script>
 </body>
 </html>
