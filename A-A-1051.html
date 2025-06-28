@@ -2,12 +2,119 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>A-A-1051 Product Details</title>
+  <title>A-A-1051 Corrugated Roll Product Details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+    main {
+      max-width: 600px;
+      margin: 40px auto;
+      background: rgba(34,49,63,0.85);
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+      padding: 32px 24px 24px 24px;
+    }
+    .product-image-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .product-image {
+      max-width: 350px;
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      background: #fff;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+    .description {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.08em;
+    }
+    .cost {
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 22px;
+    }
+    .purchase-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .purchase-form label {
+      font-size: 1em;
+      margin-bottom: 6px;
+    }
+    .purchase-form input[type="number"] {
+      padding: 6px 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+      width: 100px;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+    .purchase-form button {
+      background: #ffdc65;
+      color: #22313f;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 24px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background 0.2s;
+    }
+    .purchase-form button:hover {
+      background: #ffe9a8;
+    }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+      color: #ffdc65;
+      text-decoration: none;
+      font-weight: bold;
+      letter-spacing: 0.02em;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
-  <h1>A-A-1051 Product Details</h1>
-  <p>Here you can add all the details, images, and descriptions for the A-A-1051 product.</p>
-  <!-- Add more product info here -->
-  <a href="index.html">Back to Reference Guide</a>
+  <main>
+    <div class="product-image-container">
+      <img src="A-A-1051.jpg" alt="A-A-1051 Corrugated Roll" class="product-image">
+    </div>
+    <h1>A-A-1051 Corrugated Roll</h1>
+    <div class="description">
+      The <strong>A-A-1051 Corrugated Roll</strong> is a versatile and flexible packaging material ideal for protecting a variety of items during shipping and storage. Its single-face design offers lightweight cushioning and is easy to cut or wrap, making it perfect for interleaving, surface protection, and void fill in boxes.<br><br>
+      <em>Dimensions:</em> 48" x 250' (Standard Roll) <br>
+      <em>Material:</em> Recycled Kraft Paper Corrugated
+    </div>
+    <div class="cost">
+      Cost: <span style="color:#ffdc65;">$34.99</span> per roll
+    </div>
+    <form class="purchase-form">
+      <label for="quantity">Quantity:</label>
+      <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+      <button type="submit">Add to Cart</button>
+    </form>
+    <a href="index.html" class="back-link">&larr; Back to Reference Guides</a>
+  </main>
 </body>
 </html>
