@@ -167,61 +167,101 @@
     <a href="index.html" class="back-link">&larr; Back to Reference Guides</a>
   </main>
   <script>
-    // Simple cart object for this page only
-    let cart = {
-      product: {
-        name: "A-A-1051 Corrugated Roll",
-        price: 34.99,
-        quantity: 0
-      }
+    // ----- Product Data (change as needed per product page) -----
+    const productData = {
+      id: "A-A-1051",
+      name: "A-A-1051 Corrugated Roll",
+      price: 34.99
     };
 
-    // Update cart display
+    // ----- Cart Functions -----
+    function getCart() {
+      return JSON.parse(localStorage.getItem('cart') || '[]');
+    }
+    function saveCart(cart) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+    function addToCart(product, quantity) {
+      let cart = getCart();
+      const index = cart.findIndex(item => item.id === product.id);
+      if (index > -1) {
+        cart[index].quantity += quantity;
+      } else {
+        cart.push({ ...product, quantity });
+      }
+      saveCart(cart);
+    }
+    function updateCartItem(productId, quantity) {
+      let cart = getCart();
+      cart = cart.map(item =>
+        item.id === productId ? { ...item, quantity } : item
+      ).filter(item => item.quantity > 0);
+      saveCart(cart);
+    }
+    function removeFromCart(productId) {
+      let cart = getCart();
+      cart = cart.filter(item => item.id !== productId);
+      saveCart(cart);
+    }
+
+    // ----- Render Cart -----
     function renderCart() {
       const cartContent = document.getElementById('cart-content');
-      if (cart.product.quantity > 0) {
-        cartContent.innerHTML = `
-          <div class="cart-details">
-            <strong>${cart.product.name}</strong><br>
-            $${cart.product.price.toFixed(2)} per roll<br>
-            Quantity: 
-            <input type="number" min="1" value="${cart.product.quantity}" id="cart-qty-input">
-            <button class="cart-remove" id="cart-remove-btn">Remove</button>
+      const cart = getCart();
+      if (cart.length === 0) {
+        cartContent.innerHTML = `<div class="empty-cart">Your cart is empty.</div>`;
+        return;
+      }
+      let html = '';
+      let grandTotal = 0;
+      cart.forEach(item => {
+        const total = item.price * item.quantity;
+        grandTotal += total;
+        html += `
+          <div class="cart-details" data-id="${item.id}">
+            <strong>${item.name}</strong><br>
+            $${item.price.toFixed(2)} per unit<br>
+            Quantity:
+            <input type="number" min="1" value="${item.quantity}" class="cart-qty-input" data-id="${item.id}">
+            <button class="cart-remove" data-id="${item.id}">Remove</button>
             <br>
-            <strong>Total: $${(cart.product.price * cart.product.quantity).toFixed(2)}</strong>
+            <strong>Total: $${total.toFixed(2)}</strong>
           </div>
         `;
-        // Update quantity
-        document.getElementById('cart-qty-input').addEventListener('change', function() {
+      });
+      html += `<div class="cart-details"><strong>Grand Total: $${grandTotal.toFixed(2)}</strong></div>`;
+      cartContent.innerHTML = html;
+
+      // Attach event listeners to new elements
+      cartContent.querySelectorAll('.cart-qty-input').forEach(input => {
+        input.addEventListener('change', function() {
           const newQty = parseInt(this.value, 10);
           if (newQty > 0) {
-            cart.product.quantity = newQty;
+            updateCartItem(this.dataset.id, newQty);
             renderCart();
           }
         });
-        // Remove item
-        document.getElementById('cart-remove-btn').addEventListener('click', function() {
-          cart.product.quantity = 0;
+      });
+      cartContent.querySelectorAll('.cart-remove').forEach(btn => {
+        btn.addEventListener('click', function() {
+          removeFromCart(this.dataset.id);
           renderCart();
         });
-      } else {
-        cartContent.innerHTML = `<div class="empty-cart">Your cart is empty.</div>`;
-      }
+      });
     }
 
-    // Handle form submission
+    // ----- Handle Add to Cart -----
     document.querySelector('.purchase-form').addEventListener('submit', function(e) {
       e.preventDefault();
       const qty = parseInt(document.getElementById('quantity').value, 10);
       if (qty > 0) {
-        cart.product.quantity += qty;
+        addToCart(productData, qty);
         renderCart();
-        // Optional: Reset form
         document.getElementById('quantity').value = 1;
       }
     });
 
-    // Initial render
+    // ----- Initial Render -----
     renderCart();
   </script>
 </body>
